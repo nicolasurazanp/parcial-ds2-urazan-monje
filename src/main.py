@@ -2,9 +2,8 @@ from pymongo import MongoClient
 from CampanaPruebas import CampanaPruebas 
 
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://admin:123456@localhost:27017/?authSource=admin")
 db = client["MatriculApp"]
-URI = "mongodb://admin:123456@localhost:27017/?authSource=admin"
 coleccion = db["semanas"]
 
 datos_mongo = list(coleccion.find().sort("semana", 1))

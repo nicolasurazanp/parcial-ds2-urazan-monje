@@ -1,12 +1,12 @@
 import os
 import numpy as np 
-import matplotl.pyplot as plt 
+import matplotlib.pyplot as plt 
 from scipy.optimize import curve_fit 
 
 
 
 class CampanaPruebas: 
-    def _init__(self, defectos ):
+    def __init__(self, defectos ):
         lista = []
         for item in defectos:
             if isinstance(item, dict):
@@ -29,6 +29,8 @@ class CampanaPruebas:
         params, _ = curve_fit(self.goel, self.t, self.acumulados, p0=p0)
         self.a = params[0]
         self.b= params[1]
+        return self.a, self.b
+
 
     def restantes(self):
         t_actual = self.t[-1]
@@ -44,7 +46,7 @@ class CampanaPruebas:
         y_curva = self.goel(t_curva, self.a, self.b)
 
         plt.figure(figsize=(8, 5))
-        plt.scatter(self.t, self.acumulados, colors="red", label="acumulados reales")
+        plt.scatter(self.t, self.acumulados, color="red", label="acumulados reales")
         plt.plot(t_curva, y_curva, color="blue", label="Curva Goel")
         plt.title("Evolucion del software")
         plt.xlabel("semana")
@@ -54,7 +56,7 @@ class CampanaPruebas:
         plt.savefig(ruta)
         plt.close()
 
-        
+
 
     
 
